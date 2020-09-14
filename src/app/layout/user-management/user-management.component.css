@@ -1,0 +1,41 @@
+table {
+    width: 100%;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+    background-color: #2874A6 !important;
+    /* Red background for example */
+}
+
+th {
+    color: #2874A6;
+    font-size: 15px;
+}
+
+.inputLine {
+    width: 100%;
+}
+
+.control-container {
+    display: flex;
+    justify-content: space-between
+}
+
+@media (max-width:480px) {
+    .control-container {
+        display: block;
+    }
+}
+
+.mat-row {
+    height: auto;
+}
+
+.mat-cell {
+    padding: 8px 8px 8px 0;
+}
