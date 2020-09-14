@@ -1,0 +1,124 @@
+<div *ngIf="showUserDetail">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div>User Name</div>
+            <h2>{{userDetails.name}}</h2>
+
+        </div>
+
+        <div>
+            <button class="btn btn-primary mr-4" [routerLink]="['/layout/notification-management']" [queryParams]="{userId: userDetails.user_id}">Create Notification</button>
+            <button class="btn" (click)="userDetails.isActive==0 ? changeUserStatus(1) : changeUserStatus(0)" [ngClass]="{'btn-success':userDetails.isActive == 0 ,'btn-danger':userDetails.isActive == 1}">{{userDetails.isActive==0 ? 'Activate' : 'Deactivate'}}</button>
+
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div class="row">
+            <div class="col-lg-4">
+                <span>Email : </span><strong>{{userDetails.email}}</strong>
+            </div>
+            <div class="col-lg-4F">
+                <span>Phone No. : </span><strong>{{userDetails.contact}}</strong>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <span>Driver-rating & Review : </span><strong>{{reviewRating.rating_as_driver.rating_count}}</strong>
+            </div>
+            <div class="col-lg-4F">
+                <span>Rider-rating & Review : </span><strong>{{reviewRating.rating_as_rider.rating_count}}</strong>
+            </div>
+        </div>
+        <br>
+        <div style="display: flex;">
+            <div>
+                <mat-card class="example-card mr-4">
+                    <img *ngIf="!userDetails.govt_id_front" mat-card-image src="../../../../assets/media/no-image.png" alt="no-image" class="mat-image">
+                    <img *ngIf="userDetails.govt_id_front" mat-card-image src='{{userDetails.govt_id_front}}' alt="Photo of a Shiba Inu" class="mat-image">
+                    <h4>Front</h4>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card class="example-card">
+                    <img *ngIf="!userDetails.govt_id_front" mat-card-image src="../../../../assets/media/no-image.png" alt="no-image" class="mat-image">
+                    <img *ngIf="userDetails.govt_id_front" mat-card-image src="{{userDetails.govt_id_back}}" alt="Photo of a Shiba Inu" class="mat-image">
+                    <h4>Back</h4>
+                </mat-card>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    <div>
+        <mat-tab-group animationDuration="0ms" (selectedTabChange)="getRidesData($event.index)">
+            <mat-tab label="Posted Rides" (selectedTabChange)="getRidesData(0)"></mat-tab>
+            <mat-tab label="Taken Rides" (selectedTabChange)="getRidesData(1)"></mat-tab>
+            <mat-tab label="Requested Rides" (selectedTabChange)="getRidesData(2)"></mat-tab>
+        </mat-tab-group>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Position Column -->
+
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="postedDate">
+                <th mat-header-cell *matHeaderCellDef>{{ ride==0 ? 'Posted Date' : 'Requested Date' }}</th>
+                <td mat-cell *matCellDef="let element"> {{_dateService.dateTimeFormat(element.createdAt)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="from">
+                <th mat-header-cell *matHeaderCellDef> From </th>
+                <td mat-cell *matCellDef="let element"> {{element.pickup_address}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="to">
+                <th mat-header-cell *matHeaderCellDef> To </th>
+                <td mat-cell *matCellDef="let element"> {{element.drop_off_address}} </td>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="rideDate">
+                <th mat-header-cell *matHeaderCellDef> Ride Date </th>
+                <td mat-cell *matCellDef="let element">{{_dateService.dateTimeFormat(element.createdAt)}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="action" *ngIf="ride == 0 || ride == 1">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"><i class="fa fa-eye fa-lg" aria-hidden="true"></i> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+        </table>
+
+        <div class="loader">
+            <div class="spinner-border text-primary" role="status" *ngIf="showLoader">
+
+            </div>
+            <span *ngIf="dataSource?.data.length < 1 && !showLoader" style=" margin-top: 7px; color: darkblue; margin-left: 8px;">No Records Found</span>
+
+        </div>
+    </div>
+</div>

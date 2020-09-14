@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LocalService {
+
+  constructor() { }
+
+  getFromLocal(key: string) : string{
+    return localStorage.getItem(key);
+  }
+
+  setInLocal(key :string,value : string){
+    localStorage.setItem(key,value)
+  }
+
+  removeFromLocal(key : string){
+    localStorage.removeItem(key)
+  }
+}

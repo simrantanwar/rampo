@@ -1,0 +1,18 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/dashboard']">Dashboard</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/user-management']">User Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/payments-management']">Payments Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/notification-management']">Notification Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/ride-management']">Ride Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/coupon-management']">Coupon Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/reports-management']">Reports Management</a>
+    <a (click)="closeNav()" [routerLink]="['/layout/payout']">Payout</a>
+
+</div>
+
+
+<div id="main">
+    <span style="cursor:pointer; position: absolute; top: 13px; left: 10px;" (click)="openNav()"><img class="ride-logo" src="assets/media/ride-logo.png" alt=""></span>
+
+</div>

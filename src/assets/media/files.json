@@ -1,0 +1,11 @@
+{
+    "result": [
+        "assets/media/background-image.jpg",
+        "assets/media/ride-logo.png",
+        "assets/media/no-image.png"
+
+    ],
+    "status": 200,
+    "success": true,
+    "message": "data fetched successfully"
+}

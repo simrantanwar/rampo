@@ -1,0 +1,29 @@
+.heading {
+    color: darkblue;
+}
+
+::ng-deep .mat-form-field-label {
+    color: #2786fb !important;
+}
+
+.mat-input-element {
+    caret-color: #2786fb;
+}
+
+::ng-deep.mat-form-field-ripple {
+    background-color: #2786fb !important;
+}
+
+.inputLine {
+    width: 50%;
+}
+
+label {
+    color: #2786fb;
+    cursor: pointer;
+}
+
+.btn-light:hover {
+    background-color: #007bff;
+    color: white;
+}
